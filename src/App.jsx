@@ -37,10 +37,10 @@ const App = () => {
       <StickyNav />
       <div className="flex max-w-7xl m-auto gap-6 py-8">
         <ProfileSidebar />
-        <Overview />
+        {data && <Overview repos={data.user.repositories} />}
       </div>
-      {data && <div>{String(data)}</div>}
-      {error && <div>{String(error)}</div>}
+      {/* {data && <div>{String(data)}</div>}
+      {error && <div>{String(error)}</div>} */}
     </div>
   );
 };

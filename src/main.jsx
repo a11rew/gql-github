@@ -16,9 +16,7 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = ``;
-
-  console.log("orna token", token);
+  const token = import.meta.env.VITE_GH_KEY;
 
   return {
     headers: {
