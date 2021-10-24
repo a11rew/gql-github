@@ -1,9 +1,36 @@
+import { useQuery, gql } from "@apollo/client";
+
 import Header from "./components/Header";
 import StickyNav from "./components/StickyNav";
 import Overview from "./components/Overview";
 import ProfileSidebar from "./components/ProfileSidebar";
 
+const PROFILE_QUERY = gql`
+  {
+    user(login: "a11rew") {
+      id
+      bio
+      location
+      followers {
+        totalCount
+      }
+      following {
+        totalCount
+      }
+      repositories(last: 6) {
+        totalCount
+        nodes {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
+
 const App = () => {
+  const { data, error } = useQuery(PROFILE_QUERY);
+
   return (
     <div className="bg-canvas h-screen text-text-primary">
       <Header />
@@ -12,6 +39,8 @@ const App = () => {
         <ProfileSidebar />
         <Overview />
       </div>
+      {data && <div>{String(data)}</div>}
+      {error && <div>{String(error)}</div>}
     </div>
   );
 };
